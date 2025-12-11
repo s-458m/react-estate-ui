@@ -10,8 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@cloudinary/react": "^1.14.3",
+    "@cloudinary/url-gen": "^1.22.0",
+    "axios": "^1.13.2",
+    "leaflet": "^1.9.4",
+    "react": "^19.0.0-rc.1",
+    "react-dom": "^19.0.0-rc.1",
+    "react-leaflet": "^5.0.0",
+    "react-router-dom": "^7.9.6",
+    "sass": "^1.94.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",
