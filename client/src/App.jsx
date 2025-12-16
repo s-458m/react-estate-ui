@@ -2,6 +2,7 @@ import HomePage from './routes/homePage/homePage';
 import { Layout, RequireAuth } from './routes/layout/layout';
 import ListPage from './routes/listPage/listPage';
 import Login from './routes/login/login';
+import NewPostPage from './routes/newPostPage/newPostPage';
 import ProfilePage from './routes/profilePage/ProfilePage';
 import ProfileUpdatePage from './routes/profileUpdatePage/profileUpdatePage';
 import Register from './routes/register/register';
@@ -58,6 +59,10 @@ function App() {
         {
           path: "/profile/update",
           element: <ProfileUpdatePage />
+        },
+        {
+          path: "/add",
+          element: <NewPostPage />
         },
       ]
     }
