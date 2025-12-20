@@ -34,6 +34,7 @@ function NewPostPage(){
                     longitude: inputs.longitude,
                     type: inputs.type,
                     property: inputs.property,
+                    images: images,
                 },
                 postDetail: {
                     desc: value,
@@ -156,9 +157,7 @@ function NewPostPage(){
             <div className="sideContainer">
                 {images.map((image, index) => (
                     <img src={image} key={index} alt="" />
-                ))
-
-                }
+                ))}
                 <UploadWidget
                     uwConfig={{
                         cloudName: cloudName,

@@ -14,59 +14,27 @@ import {
 
 function App() {
   const router = createBrowserRouter([
-    {
-      path: "/",
-      element: (
-        <Layout />
-      ),
-      children:[
-        {
-          path: "/",
-          element: <HomePage />
-        },
-        {
-          path: "/list",
-          element: <ListPage />
-        },
-        {
-          path: "/:id",
-          element: <SinglePage />
-        },
-        {
-          path: "/register",
-          element: <Register />
-        },
-        {
-          path: "/login",
-          element: <Login />
-        },
-      ],
-    },
-    {
-      path: "/list",
-      element: (
-        <ListPage />
-      ),
-    },
-    {
-      path: "/",
-      element: <RequireAuth />,
-      children: [
-        {
-          path: "/profile",
-          element: <ProfilePage />
-        },
-        {
-          path: "/profile/update",
-          element: <ProfileUpdatePage />
-        },
-        {
-          path: "/add",
-          element: <NewPostPage />
-        },
-      ]
-    }
-  ]);
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: "list", element: <ListPage /> },
+      { path: ":id", element: <SinglePage /> },
+      { path: "register", element: <Register /> },
+      { path: "login", element: <Login /> },
+
+      {
+        element: <RequireAuth />,
+        children: [
+          { path: "profile", element: <ProfilePage /> },
+          { path: "profile/update", element: <ProfileUpdatePage /> },
+          { path: "add", element: <NewPostPage /> },
+        ],
+      },
+    ],
+  },
+]);
 
   return (
     <RouterProvider router={router}/>
