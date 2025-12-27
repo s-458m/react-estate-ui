@@ -42,32 +42,34 @@ export const getPost = async (req, res) => {
         });
         console.log(post);
 
-        let userId;
+        let userId = null;
 
         const token = req.cookies?.token;
 
-        if (!token) {
-            userId = null;
-        } else {
-            jwt.verify(token, process.env.JWT_SECRET_KEY, async (error, payload) => {
-                if (error) {
-                    userId = null;
-                } else {
-                    userId = payload.id;
-                }
-            });
+        if (token) {
+            try {
+                const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
+                userId = payload.id;
+            } catch (error) {
+                userId = null;
+            }
         }
 
-        const saved = await prisma.savedPost.findUnique({
-            where: {
-                userId_postId: {
-                    postId: id,
-                    userId,
-                },
-            },
-        });
+        let isSaved = false;
 
-        res.status(200).json({...post, isSaved: saved ? true : false});
+        if (userId) {
+            const saved = await prisma.savedPost.findUnique({
+                where: {
+                    userId_postId: {
+                        postId: id,
+                        userId: userId,
+                    },
+                },
+            });
+            isSaved = !!saved;
+        }
+
+        res.status(200).json({ ...post, isSaved });
     } catch (error) {
         console.log(error);
         res.status(500).json({message: "Failed to get post"});
