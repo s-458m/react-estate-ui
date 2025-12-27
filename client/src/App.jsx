@@ -1,3 +1,4 @@
+import { listPageLoader, singlePageLoader } from './lib/loaders.js';
 import HomePage from './routes/homePage/homePage';
 import { Layout, RequireAuth } from './routes/layout/layout';
 import ListPage from './routes/listPage/listPage';
@@ -26,11 +27,13 @@ function App() {
         },
         {
           path: "/list",
-          element: <ListPage/>
+          element: <ListPage/>,
+          loader: listPageLoader
         },
         {
           path: "/:id",
-          element: <SinglePage/>
+          element: <SinglePage/>,
+          loader: singlePageLoader
         },
         {
           path: "/register",
@@ -43,18 +46,13 @@ function App() {
       ]
     },
     {
-      path: "/list",
-      element: (
-        <ListPage/>
-      )
-    },
-    {
       path: "/",
       element: <RequireAuth/>,
       children: [
         {
           path: "/profile",
-          element: <ProfilePage/>
+          element: <ProfilePage/>,
+          loader: listPageLoader
         },
         {
           path: "/profile/update",
